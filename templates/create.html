@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>新規作成</title>
+{% endblock %}
+
+{% block content %}
+<h1>ToDo作成</h1>
+<form action="{{ url_for('register_article') }}" method="post">
+    <div>
+    <label for="title">タイトル</label>
+    <input type="text" name="title" id="title">
+    </div>
+    <div>
+    <label for="content">内容</label><br>
+    <textarea name="content" id="content" cols="30" rows="15"></textarea>
+    </div>
+    <button>追加</button>
+
+    <h1>Todo</h1>
+    <table>
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>タイトル</th>
+            <th>内容</th>
+            <th>作成日時</th>
+            <th>機能</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+            <th>{{ article['ID'] }}</th>
+            <th>{{ article['TITLE'] }}</th>
+            <th>{{ article['CONTENT'] }}</th>
+            <th>{{ article['DATE'] }}</th>
+            <th>
+                <a href="{{ url_for('delete_article', id=article['ID']) }}">削除</a>
+            </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </form>
+{% endblock %}
